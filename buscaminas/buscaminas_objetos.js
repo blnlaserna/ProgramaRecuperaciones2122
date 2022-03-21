@@ -4,7 +4,6 @@ class Tablero {
         this.numColumnas = numColumnas;
 
         this.crearTableroVacio();
-        this.crearListadoCeldasVecinas();
     }
 
     crearTableroVacio(){
@@ -16,74 +15,27 @@ class Tablero {
                 this.listaCeldas[fila][columna] = new Celda(fila, columna);
             }
         }
+
+        for (let fila=0; fila<this.numFilas; fila++) {
+            for (let columna=0; columna<this.numColumnas; columna++) {
+                this.crearListaCeldaVecino(this.listaCeldas[fila][columna]);
+            }
+        }
     }
 
-    crearListadoCeldasVecinas() {
-        for (let fila=0; fila<this.numFilas; fila++) {
-            for (let columna=0; columna<this.numColumnas; columna++){
-                if (fila == 0 && columna == 0) {
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila][columna+1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila+1][columna+1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila+1][columna]);
+    crearListaCeldaVecino(celda) {
+        for (let i=-1; i<=1; i++) {
+            for (let j=-1; j<=1; j++) {
+                if (i==0 && j==0) {
+                    continue;
                 }
-                if (fila == 0 && columna == this.numColumnas-1){
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila][columna-1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila+1][columna-1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila+1][columna]);
-                }
-                if (fila == this.numFilas-1 && columna == 0) {
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila-1][columna]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila-1][columna+1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila][columna+1]);
-                }
-                if (fila == this.numFilas-1 && columna == this.numColumnas-1) {
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila-1][columna]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila-1][columna-1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila][columna-1]);
-                }
-                if (fila == 0 && columna != 0 && columna != this.numColumnas-1) {
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila][columna-1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila+1][columna-1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila+1][columna]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila+1][columna+1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila][columna+1]);
 
-                }
-                if (fila == this.numFilas-1 && columna != 0 && columna != this.numColumnas-1) {
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila][columna-1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila-1][columna-1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila-1][columna]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila-1][columna+1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila][columna+1]);
-                }
-                if (fila != 0 && fila != this.numFilas-1 && columna == 0) {
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila-1][columna]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila-1][columna+1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila][columna+1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila+1][columna+1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila+1][columna]);
-                }
-                if (fila != 0 && fila != this.numFilas-1 && columna == this.numColumnas-1) {
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila-1][columna]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila-1][columna-1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila][columna-1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila+1][columna-1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila+1][columna]);
-                }
-                if (fila != 0 && fila != this.numFilas-1 && columna != 0 && columna != this.numColumnas-1) {
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila-1][columna-1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila-1][columna]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila-1][columna+1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila][columna+1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila+1][columna+1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila+1][columna]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila+1][columna-1]);
-                    this.listaCeldas[fila][columna].insertarVecino(this.listaCeldas[fila][columna-1]);
+                if ((celda.fila+i>=0) && (celda.columna+j>=0) && (celda.fila+i<=this.numFilas-1) && (celda.columna+j<=this.numColumnas-1)){
+                    celda.insertarVecino(this.listaCeldas[celda.fila+i][celda.columna+j])
                 }
             }
         }
     }
-    
 
     dibujar() {
         document.write(`<table>`);
@@ -100,12 +52,11 @@ class Tablero {
     recalcular(...nuevosValores) {
         if (nuevosValores.length == 0) {
             this.crearTableroVacio();
-            this.crearListadoCeldasVecinas();
         } else if (nuevosValores.length == 2) {
             this.numFilas = nuevosValores[0];
             this.numColumnas = nuevosValores[1];
             this.crearTableroVacio();
-            this.crearListadoCeldasVecinas();
+            
         }
     }
 
@@ -211,6 +162,5 @@ let patronTablero = /^[0-1]?[0-9]$/
 
 let tableroBuscaminas = new TableroBuscaminas(numFilas, numColumnas, numMinas);
 tableroBuscaminas.dibujar();
-tableroBuscaminas.recalcular(5,5,10);
-tableroBuscaminas.dibujar();
-console.log(tableroBuscaminas.numColumnas);
+// tableroBuscaminas.recalcular(5,5,10);
+// tableroBuscaminas.dibujar();
