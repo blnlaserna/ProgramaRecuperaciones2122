@@ -31,7 +31,7 @@ class Tablero {
                 }
 
                 if ((celda.fila+i>=0) && (celda.columna+j>=0) && (celda.fila+i<=this.numFilas-1) && (celda.columna+j<=this.numColumnas-1)){
-                    celda.insertarVecino(this.listaCeldas[celda.fila+i][celda.columna+j])
+                    celda.insertarVecino(this.listaCeldas[celda.fila+i][celda.columna+j]);
                 }
             }
         }
