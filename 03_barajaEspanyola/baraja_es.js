@@ -9,3 +9,15 @@ function dibujarMesa() {
     document.write(`</div>`);
 }
 
+function crearBaraja() {
+    let baraja = new Map();
+
+    for (let i=1; i<=4; i++) {
+        baraja.set(i, []);
+        for (let j=0; j<10; j++) {
+            baraja.get(i).push(j);
+        }
+    }
+
+    return baraja;
+}
