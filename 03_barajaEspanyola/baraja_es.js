@@ -10,14 +10,25 @@ function dibujarMesa() {
 }
 
 function crearBaraja() {
-    let baraja = new Map();
+    let baraja = [];
+    let palo = ['oros', 'espadas', 'bastos', 'copas'];
+    let sotaCaballoRey = ['sota', ' caballo', 'rey'];
 
-    for (let i=1; i<=4; i++) {
-        baraja.set(i, []);
+    for (let i=0; i<4; i++) {
+        baraja[i] = [];
         for (let j=0; j<10; j++) {
-            baraja.get(i).push(j);
+            if (j>=7) {
+                baraja[i][j] = `${sotaCaballoRey[j-7]} de ${palo[i]}`
+            } else {
+                if (j == 0) {
+                    baraja[i][j] = `As de ${palo[i]}`
+                } else {
+                    baraja[i][j] = `${j+1} de ${palo[i]}`;
+                }  
+            }  
         }
     }
 
     return baraja;
 }
+
