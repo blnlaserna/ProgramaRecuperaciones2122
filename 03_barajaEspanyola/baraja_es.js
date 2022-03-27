@@ -32,3 +32,24 @@ function crearBaraja() {
     return baraja;
 }
 
+function barajar (baraja) {
+   let palo1;
+   let palo2;
+   let cartaPalo1;
+   let cartaPalo2;
+   let numeroVueltas = 500;
+
+    for (let i = 1; i <= numeroVueltas; i++) {
+        palo1 = parseInt(Math.random()*baraja.length);
+        palo2 = parseInt(Math.random()*baraja.length);
+        
+        cartaPalo1 = parseInt(Math.random() * baraja[0].length);
+        cartaPalo2 = parseInt(Math.random() * baraja[0].length);
+            
+        [baraja[palo1][cartaPalo1], baraja[palo2][cartaPalo2]] = [baraja[palo2][cartaPalo2], baraja[palo1][cartaPalo1]];
+        
+    }
+    return baraja;
+}
+
+
