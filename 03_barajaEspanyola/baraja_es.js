@@ -52,4 +52,11 @@ function barajar (baraja) {
     return baraja;
 }
 
+function extraerCartas(baraja, numCartas) {
+    let cartas = [];
+    for (let i=1; i<=numCartas; i++) {
+        cartas.push(baraja[baraja.length-1].splice(baraja[baraja.length - 1][baraja[baraja.length - 1].lenght - 1],1))
+    }
 
+    return cartas;
+}
