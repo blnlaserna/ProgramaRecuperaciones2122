@@ -33,71 +33,52 @@ class Baraja {
     constructor() {
         this.cartas = [];
 
-        for (let i=0; i< 4; i++) {
-            this.cartas[i] = [];
-            for (let j=0; j<10; j++) {
-                this.cartas[i][j] = new Carta(i+1, j+1);
+        for (let i=1; i<= 4; i++) {
+            for (let j=1; j<= 10; j++) {
+                this.cartas.push(new Carta(i, j));
             }
         }
     }
 
     barajar() {
-        let palo1;
-        let palo2;
-        let cartaPalo1;
-        let cartaPalo2;
-        let numeroVueltas = 500;
-     
-         for (let i = 1; i <= numeroVueltas; i++) {
-             palo1 = parseInt(Math.random()*this.cartas.length);
-             palo2 = parseInt(Math.random()*this.cartas.length);
-             
-             cartaPalo1 = parseInt(Math.random() * this.cartas[0].length);
-             cartaPalo2 = parseInt(Math.random() * this.cartas[0].length);
-                 
-             [this.cartas[palo1][cartaPalo1], this.cartas[palo2][cartaPalo2]] = [this.cartas[palo2][cartaPalo2], this.cartas[palo1][cartaPalo1]]; 
-         }
+         this.cartas.sort(()=> Math.random() - 0.5);
+         
      }
 
      toString() {
-         let baraja = [];
-         for (let i = 0; i < this.cartas.length; i++) {
-             baraja[i] = [];
-             for (let j = 0; j < this.cartas[i].length; j++) {
-                 baraja[i][j] = this.cartas[i][j].toString();
-             }
+         let baraja= []
+         for (let i=0; i < 40; i++) {
+            baraja.push(this.cartas[i].toString());
          }
-
          return baraja.join();
      }
 }
 
+var baraja1 = new Baraja();
+baraja1.barajar();
+
 function extraerCartas(baraja, numCartas) {
     let cartas = [];
     for (let i=1; i<=numCartas; i++) {
-        cartas.push(baraja[baraja.length-1].splice(baraja[baraja.length - 1][baraja[baraja.length - 1].lenght - 1],1))
+        cartas.push(baraja.splice(baraja[baraja.length - 1],1))
     }
 
     return cartas;
 }
 
-
-document.addEventListener("DOMContentLoaded", function(event) {
-    
-    
-    
-});
-
-function repartir() {
-    var baraja1 = new Baraja();
-    baraja1.barajar();
-    
-    let cartas = extraerCartas(baraja1.cartas, 8);
+function repartir(baraja) {
 
     let arrayDiv = document.getElementsByTagName('div');
 
-    for (let i=0; i < cartas.length; i++) {
-        arrayDiv[i].innerHTML = cartas[i].toString();
+    if (baraja.cartas.length != 0)  {
+        let cartas = extraerCartas(baraja.cartas, 8);
+        
+        for (let i=0; i < cartas.length; i++) {
+            arrayDiv[i].innerHTML = cartas[i].toString();
+        }
+    } else {
+        let p = document.createElement('p');
+        p.appendChild(document.createTextNode('Ya no quedan cartas'));
+        document.body.lastElementChild.appendChild(p);
     }
-
 }
