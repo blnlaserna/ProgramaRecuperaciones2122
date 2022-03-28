@@ -60,3 +60,14 @@ function extraerCartas(baraja, numCartas) {
 
     return cartas;
 }
+
+
+function empezar() {
+    let baraja = barajar(crearBaraja());
+    console.log(baraja);
+    let carta = extraerCartas(baraja, 8);
+    console.log(carta);
+}
+
+empezar();
+
