@@ -33,41 +33,23 @@ class Baraja {
     constructor() {
         this.cartas = [];
 
-        for (let i=0; i< 4; i++) {
-            this.cartas[i] = [];
-            for (let j=0; j<10; j++) {
-                this.cartas[i][j] = new Carta(i+1, j+1);
+        for (let i=1; i<= 4; i++) {
+            for (let j=1; j<= 10; j++) {
+                this.cartas.push(new Carta(i, j));
             }
         }
     }
 
     barajar() {
-        let palo1;
-        let palo2;
-        let cartaPalo1;
-        let cartaPalo2;
-        let numeroVueltas = 500;
-     
-         for (let i = 1; i <= numeroVueltas; i++) {
-             palo1 = parseInt(Math.random()*this.cartas.length);
-             palo2 = parseInt(Math.random()*this.cartas.length);
-             
-             cartaPalo1 = parseInt(Math.random() * this.cartas[0].length);
-             cartaPalo2 = parseInt(Math.random() * this.cartas[0].length);
-                 
-             [this.cartas[palo1][cartaPalo1], this.cartas[palo2][cartaPalo2]] = [this.cartas[palo2][cartaPalo2], this.cartas[palo1][cartaPalo1]]; 
-         }
+         this.cartas.sort(()=> Math.random() - 0.5);
+         
      }
 
      toString() {
-         let baraja = [];
-         for (let i = 0; i < this.cartas.length; i++) {
-             baraja[i] = [];
-             for (let j = 0; j < this.cartas[i].length; j++) {
-                 baraja[i][j] = this.cartas[i][j].toString();
-             }
+         let baraja= []
+         for (let i=0; i < 40; i++) {
+            baraja.push(this.cartas[i].toString());
          }
-
          return baraja.join();
      }
 }
