@@ -15,15 +15,14 @@ function crearBaraja() {
     let sotaCaballoRey = ['sota', ' caballo', 'rey'];
 
     for (let i=0; i<4; i++) {
-        baraja[i] = [];
         for (let j=0; j<10; j++) {
             if (j>=7) {
-                baraja[i][j] = `${sotaCaballoRey[j-7]} de ${palo[i]}`
+                baraja.push(`${sotaCaballoRey[j-7]} de ${palo[i]}`);
             } else {
                 if (j == 0) {
-                    baraja[i][j] = `As de ${palo[i]}`
+                    baraja.push(`As de ${palo[i]}`);
                 } else {
-                    baraja[i][j] = `${j+1} de ${palo[i]}`;
+                    baraja.push(`${j+1} de ${palo[i]}`);
                 }  
             }  
         }
@@ -33,34 +32,25 @@ function crearBaraja() {
 }
 
 function barajar (baraja) {
-   let palo1;
-   let palo2;
-   let cartaPalo1;
-   let cartaPalo2;
-   let numeroVueltas = 500;
-
-    for (let i = 1; i <= numeroVueltas; i++) {
-        palo1 = parseInt(Math.random()*baraja.length);
-        palo2 = parseInt(Math.random()*baraja.length);
-        
-        cartaPalo1 = parseInt(Math.random() * baraja[0].length);
-        cartaPalo2 = parseInt(Math.random() * baraja[0].length);
-            
-        [baraja[palo1][cartaPalo1], baraja[palo2][cartaPalo2]] = [baraja[palo2][cartaPalo2], baraja[palo1][cartaPalo1]];
-        
-    }
-    return baraja;
+    return baraja.sort(()=> Math.random() - 0.5);;
 }
 
 function extraerCartas(baraja, numCartas) {
     let cartas = [];
-    for (let i=1; i<=numCartas; i++) {
-        cartas.push(baraja[baraja.length-1].splice(baraja[baraja.length - 1][baraja[baraja.length - 1].lenght - 1],1))
+    for (let i=1; i<= numCartas; i++) {
+        cartas.push(baraja.splice([baraja.length - 1], 1));
     }
 
     return cartas;
 }
 
+function añadirCartas(cartas){
+    if (cartas.length != 0)  {
+        for (let i=0; i < cartas.length; i++) {
+            arrayDiv[i].innerHTML = cartas[i].toString();
+        }
+    }
+ }
 
 function empezar() {
     let baraja = barajar(crearBaraja());

@@ -52,33 +52,29 @@ class Baraja {
          }
          return baraja.join();
      }
+
+     extraerCartas(numCartas) {
+        let mano = [];
+        for (let i=1; i<=numCartas; i++) {
+            mano.push(this.cartas.splice(this.cartas[this.cartas.length - 1],1))
+        }
+    
+        return mano;
+    }
 }
 
 var baraja1 = new Baraja();
 baraja1.barajar();
-
-function extraerCartas(baraja, numCartas) {
-    let cartas = [];
-    for (let i=1; i<=numCartas; i++) {
-        cartas.push(baraja.splice(baraja[baraja.length - 1],1))
-    }
-
-    return cartas;
-}
 
 function repartir(baraja) {
 
     let arrayDiv = document.getElementsByTagName('div');
 
     if (baraja.cartas.length != 0)  {
-        let cartas = extraerCartas(baraja.cartas, 8);
+        let cartas = baraja.extraerCartas(8);
         
         for (let i=0; i < cartas.length; i++) {
             arrayDiv[i].innerHTML = cartas[i].toString();
         }
-    } else {
-        let p = document.createElement('p');
-        p.appendChild(document.createTextNode('Ya no quedan cartas'));
-        document.body.lastElementChild.appendChild(p);
     }
 }
