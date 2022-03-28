@@ -1,0 +1,13 @@
+
+div {
+    margin:10px; 
+    padding: 30px;
+}
+
+div.casilla {
+    border:3px solid; 
+    max-width:200px; 
+    max-height: 200px; 
+    background-color:lightblue; 
+    display:inline;
+}
